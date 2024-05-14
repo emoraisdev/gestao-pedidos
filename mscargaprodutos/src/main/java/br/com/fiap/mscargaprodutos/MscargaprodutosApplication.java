@@ -1,7 +1,6 @@
 package br.com.fiap.mscargaprodutos;
 
 import br.com.fiap.mscargaprodutos.listener.CustomJobProdutoExecutionListener;
-import br.com.fiap.mscargaprodutos.listener.CustomProdutoItemWriteListener;
 import br.com.fiap.mscargaprodutos.model.Produto;
 import org.springframework.batch.core.ItemWriteListener;
 import org.springframework.batch.core.JobExecutionListener;
@@ -24,11 +23,6 @@ public class MscargaprodutosApplication {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
-	}
-
-	@Bean
-	public ItemWriteListener<Produto> itemWriteListener() {
-		return new CustomProdutoItemWriteListener();
 	}
 
 	@Bean

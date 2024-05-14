@@ -3,9 +3,9 @@ package br.com.fiap.mscargaprodutos.config;
 
 import br.com.fiap.mscargaprodutos.item.JobProdutoItemWriter;
 import br.com.fiap.mscargaprodutos.listener.CustomJobProdutoExecutionListener;
-import br.com.fiap.mscargaprodutos.listener.CustomProdutoItemWriteListener;
 import br.com.fiap.mscargaprodutos.model.Produto;
 import br.com.fiap.mscargaprodutos.repository.ProdutoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -20,24 +20,25 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 
 @Configuration
+@Slf4j
 public class JobCargaProdutosBatchConfig {
 
 	private ProdutoRepository produtoRepository;
 	private JobProdutoItemWriter jobProdutoItemWriter;
-	private CustomProdutoItemWriteListener customProdutoItemWriteListener;
 	private CustomJobProdutoExecutionListener customJobProdutoExecutionListener;
 
 
 	@Autowired
 	public JobCargaProdutosBatchConfig(JobProdutoItemWriter jobProdutoItemWriter,
-									   CustomProdutoItemWriteListener customProdutoItemWriteListener, CustomJobProdutoExecutionListener customJobProdutoExecutionListener, ProdutoRepository produtoRepository){
+									   CustomJobProdutoExecutionListener customJobProdutoExecutionListener,
+									   ProdutoRepository produtoRepository){
 		this.jobProdutoItemWriter = jobProdutoItemWriter;
-		this.customProdutoItemWriteListener = customProdutoItemWriteListener;
 		this.customJobProdutoExecutionListener = customJobProdutoExecutionListener;
 		this.produtoRepository = produtoRepository;
 	}
@@ -45,13 +46,14 @@ public class JobCargaProdutosBatchConfig {
 	@Bean
 	public ItemReader<Produto> reader() {
 		RepositoryItemReader<Produto> reader = new RepositoryItemReader<>();
+		HashMap<String, Sort.Direction> sorts = new HashMap<>();
+		sorts.put("id", Sort.Direction.ASC);
+
 		reader.setRepository(produtoRepository);
 		reader.setMethodName("findByEnviadoAndHorarioExecucaoBefore");
 		reader.setArguments(Arrays.asList("N", LocalDateTime.now()));
-		reader.setPageSize(10); // Define o tamanho da página conforme necessário
-		reader.setMaxItemCount(10); // Define o número máximo de itens a serem lidos
-		HashMap<String, Sort.Direction> sorts = new HashMap<>();
-		sorts.put("id", Sort.Direction.ASC);
+		reader.setPageSize(10);
+		reader.setMaxItemCount(10);
 		reader.setSort(sorts);
 
 		return reader;
@@ -63,7 +65,6 @@ public class JobCargaProdutosBatchConfig {
 				.<Produto, Produto> chunk(100, transactionManager)
 				.reader(reader())
 				.writer(jobProdutoItemWriter)
-				.listener(customProdutoItemWriteListener)
 				.build();
 	}
 

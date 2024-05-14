@@ -17,7 +17,7 @@ public class JobScheduler {
     @Autowired
     private Job job;
 
-    @Scheduled(fixedDelay = 60000) // Executa a cada minuto
+    @Scheduled(fixedRateString = "${periodo.execucao.consumo}") // Executa a cada minuto
     public void executeJob() throws Exception {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addString("produtoJob", String.valueOf(System.currentTimeMillis()))

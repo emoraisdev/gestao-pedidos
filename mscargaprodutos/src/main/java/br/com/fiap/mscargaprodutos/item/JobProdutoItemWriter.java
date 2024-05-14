@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -19,21 +20,22 @@ public class JobProdutoItemWriter implements ItemWriter<Produto> {
 
     private final ProdutoRepository produtoRepository;
 
+    @Value("${url.produto}")
+    private String urlProduto;
+
     @Autowired
     public JobProdutoItemWriter(RestTemplate restTemplate, ProdutoRepository produtoRepository) {
         this.restTemplate = restTemplate;
         this.produtoRepository = produtoRepository;
     }
 
-
     @Override
     public void write(Chunk<? extends Produto> list) throws Exception {
         try {
             for (Produto produto : list) {
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentType(MediaType.APPLICATION_JSON);
-                HttpEntity<Produto> requestEntity = new HttpEntity<>(produto, headers);
-                ResponseEntity<ProdutoDTO> response = restTemplate.postForEntity("http://localhost:8080/produtos",requestEntity, ProdutoDTO.class);
+                HttpEntity<Produto> requestEntity = buildHttpEntity(produto);
+                ResponseEntity<ProdutoDTO> response = restTemplate.postForEntity(urlProduto,requestEntity, ProdutoDTO.class);
+
                 if (response.getStatusCode() == HttpStatus.OK) {
                     produto.setEnviado("S");
                     log.info("Chamada HTTP bem-sucedida para o produto: " + produto.getNome());
@@ -44,6 +46,13 @@ public class JobProdutoItemWriter implements ItemWriter<Produto> {
             throw new Exception("Erro durante o processamento do job", e);
         }
 
+    }
+
+    private static HttpEntity<Produto> buildHttpEntity(Produto produto) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Produto> requestEntity = new HttpEntity<>(produto, headers);
+        return requestEntity;
     }
 
 }
