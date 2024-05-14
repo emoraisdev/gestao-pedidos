@@ -1,0 +1,144 @@
+{
+  "info": {
+    "name": "Clientes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Criar Cliente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Victor\",\n  \"email\": \"victor@example.com\",\n  \"telefone\": \"123456789\",\n  \"endereco\": {\n    \"rua\": \"Rua Exemplo\",\n    \"numero\": \"123\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\",\n    \"cep\": \"01000-000\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/clientes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "clientes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Clientes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/clientes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "clientes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar Cliente por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/clientes/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "clientes",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualizar Cliente",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Victor\",\n  \"email\": \"victor@example.com\",\n  \"telefone\": \"987654321\",\n  \"endereco\": {\n    \"rua\": \"Rua Atualizada\",\n    \"numero\": \"456\",\n    \"bairro\": \"Bairro Atualizado\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\",\n    \"cep\": \"00000-000\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/clientes/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "clientes",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deletar Cliente",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/clientes/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "clientes",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
