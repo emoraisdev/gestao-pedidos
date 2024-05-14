@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "7e711a9a-c389-4309-9dd7-17bd27f6a543",
+		"name": "Microserviço Batch Carga Produto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "843251"
+	},
+	"item": [
+		{
+			"name": "Upload Arquivo",
+			"item": [
+				{
+					"name": "Salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/fabio/Documents/produtos.csv"
+								},
+								{
+									"key": "executionTime",
+									"value": "2024-05-13T12:00:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/csv/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"csv",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
