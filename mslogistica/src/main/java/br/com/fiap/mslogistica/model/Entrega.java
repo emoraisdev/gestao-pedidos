@@ -18,15 +18,21 @@ public class Entrega {
     @Column(nullable = false)
     private EntregaStatus status;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "origem_id", referencedColumnName = "id", nullable = false)
     private Endereco origem;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "destino_id", referencedColumnName = "id", nullable = false)
     private Endereco destino;
 
     @ManyToOne
     @JoinColumn(name = "entregador_id", referencedColumnName = "id", nullable = false)
     private Entregador entregador;
+
+    @Transient
+    private String urlRota;
+
+    @Embedded
+    private Coordenada localizacaoEntregador;
 }

@@ -38,4 +38,6 @@ public class Endereco {
     @Column(nullable = false)
     private String cep;
 
+    @Transient
+    private Coordenada coordenada;
 }

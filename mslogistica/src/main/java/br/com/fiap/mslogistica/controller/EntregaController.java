@@ -1,6 +1,7 @@
 package br.com.fiap.mslogistica.controller;
 
 import br.com.fiap.mslogistica.exception.EntityNotFoundException;
+import br.com.fiap.mslogistica.model.Coordenada;
 import br.com.fiap.mslogistica.model.Entrega;
 import br.com.fiap.mslogistica.service.EntregaService;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,21 @@ public class EntregaController {
         try {
             var entregaAlterada = service.alterar(entrega);
             return new ResponseEntity<>(entregaAlterada, HttpStatus.ACCEPTED);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping(path = "/localEntregador/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Object> definirLocalEntregador(@PathVariable Long id,
+                                                         @RequestBody Coordenada coordenada) {
+
+        try {
+            var localDefinido = service.definirLocalEntregador(id, coordenada);
+            return new ResponseEntity<>(localDefinido, HttpStatus.ACCEPTED);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

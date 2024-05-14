@@ -1,10 +1,14 @@
 package br.com.fiap.mslogistica.service;
 
+import br.com.fiap.mslogistica.exception.BusinessException;
 import br.com.fiap.mslogistica.exception.EntityNotFoundException;
 import br.com.fiap.mslogistica.integration.NominationAPI;
+import br.com.fiap.mslogistica.model.Coordenada;
 import br.com.fiap.mslogistica.model.Entrega;
 import br.com.fiap.mslogistica.model.enums.EntregaStatus;
 import br.com.fiap.mslogistica.repository.EntregaRepository;
+import br.com.fiap.mslogistica.service.util.OSMUrlBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,7 +42,17 @@ public class EntregaServiceImpl implements EntregaService {
         var entrega = repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Entrega.class.getSimpleName()));
 
-        System.out.println(nomitationAPI.getLocal(entrega.getOrigem()));
+        try {
+            nomitationAPI.definirLocal(entrega.getOrigem());
+            nomitationAPI.definirLocal(entrega.getDestino());
+
+            entrega.setUrlRota(OSMUrlBuilder.build(entrega.getOrigem().getCoordenada(),
+                    entrega.getDestino().getCoordenada(), entrega.getLocalizacaoEntregador()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BusinessException("Erro ao gerar URL OpenStreetMap para a Rota.");
+        }
 
         return entrega;
     }
@@ -51,6 +65,15 @@ public class EntregaServiceImpl implements EntregaService {
         entregadorService.buscar(entrega.getEntregador().getId());
 
         return repo.save(entrega);
+    }
+
+    @Override
+    public boolean definirLocalEntregador(Long entregaID, Coordenada coordenada) {
+        var entrega = buscar(entregaID);
+        entrega.setLocalizacaoEntregador(coordenada);
+        repo.save(entrega);
+
+        return true;
     }
 
     @Override
