@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -22,5 +25,4 @@ public class Produto {
     private String descricao;
     private int quantidadeEmEstoque;
     private double preco;
-
 }

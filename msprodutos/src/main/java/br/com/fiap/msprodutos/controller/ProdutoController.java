@@ -1,8 +1,10 @@
 package br.com.fiap.msprodutos.controller;
 
 
+import br.com.fiap.msprodutos.dto.ProdutoEstoqueDTO;
 import br.com.fiap.msprodutos.model.Produto;
 import br.com.fiap.msprodutos.service.ProdutoService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,4 +41,10 @@ public class ProdutoController {
     public void deletarProduto(@PathVariable Long id) {
         produtoService.deletarProduto(id);
     }
+
+    @PutMapping("/atualizar-estoque")
+    public void atualizarEstoque(@RequestBody List<ProdutoEstoqueDTO> produtos) throws BadRequestException {
+        produtoService.diminuirEstoque(produtos);
+    }
+
 }
