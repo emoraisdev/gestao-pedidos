@@ -5,6 +5,7 @@ import br.com.fiap.mslogistica.exception.EntityNotFoundException;
 import br.com.fiap.mslogistica.integration.NominationAPI;
 import br.com.fiap.mslogistica.model.Coordenada;
 import br.com.fiap.mslogistica.model.Entrega;
+import br.com.fiap.mslogistica.model.dto.EntregaStatusDTO;
 import br.com.fiap.mslogistica.model.enums.EntregaStatus;
 import br.com.fiap.mslogistica.repository.EntregaRepository;
 import br.com.fiap.mslogistica.service.util.OSMUrlBuilder;
@@ -87,5 +88,13 @@ public class EntregaServiceImpl implements EntregaService {
     @Override
     public Page<Entrega> listar(Pageable pageable) {
         return repo.findAll(pageable);
+    }
+
+    @Override
+    public Entrega atualizarStatus(Long entregaID, EntregaStatusDTO status) {
+
+        var entrega = buscar(entregaID);
+        entrega.setStatus(status.status());
+        return repo.save(entrega);
     }
 }

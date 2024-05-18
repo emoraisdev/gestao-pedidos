@@ -1,15 +1,15 @@
 package br.com.fiap.mslogistica.service.util;
 
 import br.com.fiap.mslogistica.model.Coordenada;
-import br.com.fiap.mslogistica.model.Endereco;
-
-import java.util.Optional;
 
 /**
  * Gera a URL do OpenStreetMap com a rota da Entrega.
  *
  */
 public class OSMUrlBuilder {
+
+    private OSMUrlBuilder() {
+    }
 
     private static final String BASE =  "https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=";
 

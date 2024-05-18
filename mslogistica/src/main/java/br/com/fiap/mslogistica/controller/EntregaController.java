@@ -3,6 +3,8 @@ package br.com.fiap.mslogistica.controller;
 import br.com.fiap.mslogistica.exception.EntityNotFoundException;
 import br.com.fiap.mslogistica.model.Coordenada;
 import br.com.fiap.mslogistica.model.Entrega;
+import br.com.fiap.mslogistica.model.dto.EntregaStatusDTO;
+import br.com.fiap.mslogistica.model.enums.EntregaStatus;
 import br.com.fiap.mslogistica.service.EntregaService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -52,7 +54,7 @@ public class EntregaController {
         }
     }
 
-    @PutMapping(path = "/localEntregador/{id}",
+    @PutMapping(path = "/local-entregador/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -62,6 +64,21 @@ public class EntregaController {
         try {
             var localDefinido = service.definirLocalEntregador(id, coordenada);
             return new ResponseEntity<>(localDefinido, HttpStatus.ACCEPTED);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping(path = "/atualiza-status/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Object> atualizarStatusEntrega(@PathVariable Long id,
+                                                         @RequestBody EntregaStatusDTO status) {
+
+        try {
+            var entrega = service.atualizarStatus(id, status);
+            return new ResponseEntity<>(entrega, HttpStatus.ACCEPTED);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
