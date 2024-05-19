@@ -18,11 +18,10 @@ public class CSVProcessorService {
 
     private ProdutoRepository produtoRepository;
 
-    @Value("${delimiter.file}")
-    private String delimiterFile;
+    private final String delimiterFile;
 
     @Autowired
-    public CSVProcessorService(ProdutoRepository produtoRepository, String delimiterFile){
+    public CSVProcessorService(ProdutoRepository produtoRepository, @Value("${delimiter.file}") String delimiterFile){
         this.produtoRepository = produtoRepository;
         this.delimiterFile = delimiterFile;
     }
