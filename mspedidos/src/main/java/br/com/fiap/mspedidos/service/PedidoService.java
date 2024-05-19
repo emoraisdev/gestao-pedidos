@@ -29,6 +29,9 @@ public class PedidoService {
 
     public Pedido salvar(PedidoDTO pedidoDTO) {
         List<ItemPedido> itensPedido = integracaoProdutoService.verificaAtualizaEstoque(pedidoDTO.getItensPedido());
+        if (itensPedido.isEmpty()){
+            throw new RuntimeException("Sem itens");
+        }
         Pedido pedido = criarPedido(pedidoDTO);
         pedido.setItensPedido(itensPedido);
         return pedidoRepository.save(pedido);
