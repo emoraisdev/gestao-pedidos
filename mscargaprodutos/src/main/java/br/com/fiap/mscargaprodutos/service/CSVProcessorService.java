@@ -11,18 +11,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Service
 public class CSVProcessorService {
 
-    @Autowired
     private ProdutoRepository produtoRepository;
 
     @Value("${delimiter.file}")
     private String delimiterFile;
+
+    @Autowired
+    public CSVProcessorService(ProdutoRepository produtoRepository, String delimiterFile){
+        this.produtoRepository = produtoRepository;
+        this.delimiterFile = delimiterFile;
+    }
 
 
     public void processarCsv(MultipartFile file, LocalDateTime localDateTime) throws IOException {
