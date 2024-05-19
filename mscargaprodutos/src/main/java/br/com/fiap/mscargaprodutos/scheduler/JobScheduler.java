@@ -11,11 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class JobScheduler {
 
-    @Autowired
     private JobLauncher jobLauncher;
 
-    @Autowired
     private Job job;
+
+    @Autowired
+    public JobScheduler(JobLauncher jobLauncher, Job job){
+        this.jobLauncher = jobLauncher;
+        this.job = job;
+    }
 
     @Scheduled(fixedRateString = "${periodo.execucao.consumo}") // Executa a cada minuto
     public void executeJob() throws Exception {

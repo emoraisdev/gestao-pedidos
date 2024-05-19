@@ -18,11 +18,17 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
     private String descricao;
+
     private int quantidadeEmEstoque;
+
     private double preco;
+
     private LocalDateTime horarioExecucao;
+
     private String enviado;
 
 }
