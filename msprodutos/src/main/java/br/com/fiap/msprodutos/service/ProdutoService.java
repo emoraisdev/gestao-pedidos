@@ -1,7 +1,11 @@
 package br.com.fiap.msprodutos.service;
 
+import br.com.fiap.msprodutos.dto.ProdutoEstoqueDTO;
 import br.com.fiap.msprodutos.model.Produto;
 import br.com.fiap.msprodutos.repository.ProdutoRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +44,18 @@ public class ProdutoService {
 
     public void deletarProduto(Long id) {
         produtoRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void diminuirEstoque(List<ProdutoEstoqueDTO> produtosSolicitados) throws BadRequestException {
+        for (ProdutoEstoqueDTO produtoSolicitado : produtosSolicitados) {
+            Produto produto = produtoRepository.findById(produtoSolicitado.id()).orElseThrow();
+
+            if(produtoSolicitado.quantidade() > produto.getQuantidadeEmEstoque()){
+                throw new BadRequestException("Produto solicitado não está disponível");
+            }
+            produto.setQuantidadeEmEstoque(produto.getQuantidadeEmEstoque()-produtoSolicitado.quantidade());
+            produtoRepository.save(produto);
+        }
     }
 }
