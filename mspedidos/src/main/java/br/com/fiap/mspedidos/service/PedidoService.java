@@ -32,6 +32,9 @@ public class PedidoService {
             throw new RuntimeException("Sem itens");
         }
         Pedido pedido = criarPedido(pedidoDTO, itensPedido);
+//        for (ItemPedido itemPedido : itensPedido){
+//            itemPedido.setPedido(pedido);
+//        }
         pedido.setItensPedido(itensPedido);
         return pedidoRepository.save(pedido);
     }
@@ -55,7 +58,7 @@ public class PedidoService {
     private Pedido criarPedido(PedidoDTO pedidoDTO, List<ItemPedido> itensPedido) {
         Pedido pedido = new Pedido();
         pedido.setClientId(pedidoDTO.getClienteId());
-        pedido.setDataPedido(Calendar.getInstance().getTime());
+        pedido.setDataPedido(Calendar.getInstance());
         pedido.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
         pedido.setItensPedido(itensPedido);
         preencherDadosEndereco(pedido, pedidoDTO);
