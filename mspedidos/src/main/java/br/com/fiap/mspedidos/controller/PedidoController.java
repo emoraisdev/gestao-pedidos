@@ -55,8 +55,8 @@ public class PedidoController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Object> atualizarStatusEntrega(@PathVariable Long id,
-                                                         @RequestBody StatusPedidoDTO status) {
+    public ResponseEntity<Object> atualizarStatus(@PathVariable Long id,
+                                                  @RequestBody StatusPedidoDTO status) {
 
         try {
             var pedido = pedidoService.atualizarStatus(id, status);
