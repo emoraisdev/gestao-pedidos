@@ -3,17 +3,19 @@ package br.com.fiap.mslogistica.service;
 import br.com.fiap.mslogistica.exception.BusinessException;
 import br.com.fiap.mslogistica.exception.EntityNotFoundException;
 import br.com.fiap.mslogistica.integration.NominationAPI;
+import br.com.fiap.mslogistica.integration.pedidos.PedidosAPI;
 import br.com.fiap.mslogistica.model.Coordenada;
 import br.com.fiap.mslogistica.model.Entrega;
 import br.com.fiap.mslogistica.model.dto.EntregaStatusDTO;
 import br.com.fiap.mslogistica.model.enums.EntregaStatus;
+import br.com.fiap.mslogistica.model.enums.StatusPedido;
 import br.com.fiap.mslogistica.repository.EntregaRepository;
 import br.com.fiap.mslogistica.service.util.OSMUrlBuilder;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -27,14 +29,23 @@ public class EntregaServiceImpl implements EntregaService {
 
     private final NominationAPI nomitationAPI;
 
+    private final PedidosAPI pedidosAPI;
+
     @Override
+    @Transactional
     public Entrega incluir(Entrega entrega) {
 
         entregadorService.buscar(entrega.getEntregador().getId());
 
+        pedidosAPI.consultar(entrega.getPedidoId());
+
         entrega.setStatus(EntregaStatus.PREPARANDO);
 
-        return repo.save(entrega);
+        var entregaBD = repo.save(entrega);
+
+        pedidosAPI.atualizarStatus(entrega.getPedidoId(), StatusPedido.AGUARDANDO_ENTREGA.ordinal());
+
+        return entregaBD;
     }
 
     @Override

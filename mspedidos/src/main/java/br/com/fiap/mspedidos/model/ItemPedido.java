@@ -1,12 +1,17 @@
 package br.com.fiap.mspedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class ItemPedido {
 
     @Id
@@ -15,6 +20,7 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")
+    @JsonIgnore
     private Pedido pedido;
 
     @Column(nullable = false)

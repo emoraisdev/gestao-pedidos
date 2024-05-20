@@ -2,6 +2,7 @@ package br.com.fiap.mspedidos.service;
 
 import br.com.fiap.mspedidos.dto.ItemPedidoDTO;
 import br.com.fiap.mspedidos.dto.PedidoDTO;
+import br.com.fiap.mspedidos.dto.StatusPedidoDTO;
 import br.com.fiap.mspedidos.integracao.msprodutos.dto.ProdutoEstoqueResponseDTO;
 import br.com.fiap.mspedidos.integracao.msprodutos.service.IntegracaoProdutoService;
 import br.com.fiap.mspedidos.model.ItemPedido;
@@ -11,7 +12,9 @@ import br.com.fiap.mspedidos.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,6 +42,19 @@ public class PedidoService {
 
     public List<Pedido> buscarTodos() {
         return pedidoRepository.findAll();
+    }
+
+    public Pedido getById(Long id) {
+        return pedidoRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Pedido não encontrado")
+        );
+    }
+
+    public Pedido atualizarStatus(Long entregaID, StatusPedidoDTO status) {
+
+        var pedido = getById(entregaID);
+        pedido.setStatus(status.status());
+        return pedidoRepository.save(pedido);
     }
 
     private Pedido criarPedido(PedidoDTO pedidoDTO) {
