@@ -57,6 +57,8 @@ A aplicação foi desenvolvida utilizando Test Driven Development, com as seguin
 
 Foi alcançada mais de 90% de cobertura de testes em todas as camadas da aplicação.
 
+![Evidencia da cobertura de testes](images/mscargaprodutos_coverage.png)
+
 ## 7. Desafios
 
 Os principais desafios deste projeto foram:
@@ -89,4 +91,4 @@ Os principais desafios deste projeto foram:
 
 ## 9. Conclusão
 
-O microserviço de carga de produtos foi desenvolvido seguindo práticas de desenvolvimento de software como Clean Architecture e TDD. Isso garantiu um microserviço escalável, atendendo às necessidades de gerenciamento dos produtos. A arquitetura de microserviços facilitou a manutenção e a expansão do serviço sem afetar o ecossistema por completo.
+O microserviço de carga de produtos foi desenvolvido seguindo práticas de desenvolvimento de software com TDD. Isso garantiu um microserviço escalável, atendendo às necessidades de gerenciamento dos produtos. A arquitetura de microserviços facilitou a manutenção e a expansão do serviço sem afetar o ecossistema por completo.
