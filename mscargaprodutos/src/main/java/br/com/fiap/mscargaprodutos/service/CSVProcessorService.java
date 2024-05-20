@@ -38,7 +38,9 @@ public class CSVProcessorService {
                     .descricao(lineSplited[1])
                     .preco(Double.parseDouble(lineSplited[2]))
                     .quantidadeEmEstoque(Integer.valueOf(lineSplited[3]))
-                    .horarioExecucao(localDateTime)
+                    .horarioExecucao(localDateTime == null ? LocalDateTime.now() : localDateTime)
+                    .horarioUpload(LocalDateTime.now())
+                    .tentativasEnvio(0)
                     .enviado("N")
                     .build();
 

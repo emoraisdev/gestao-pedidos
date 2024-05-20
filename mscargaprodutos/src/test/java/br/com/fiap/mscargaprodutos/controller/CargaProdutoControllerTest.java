@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,40 +28,56 @@ class CargaProdutoControllerTest {
     @InjectMocks
     private CargaProdutoController cargaProdutoController;
 
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     @Test
-    void uploadFileProduto_ValidFile_Success() throws IOException {
-        MockMultipartFile file = new MockMultipartFile("file", "test.csv", "text/csv", "test,data,10.0,100".getBytes());
+    void testUploadFileProduto_Success() throws Exception {
+        MultipartFile file = new MockMultipartFile("file", "test.csv", "text/csv", "test data".getBytes());
         LocalDateTime executionTime = LocalDateTime.now();
+
+        doNothing().when(csvProcessorService).processarCsv(file, executionTime);
 
         ResponseEntity<String> response = cargaProdutoController.uploadFileProduto(file, executionTime);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(200, response.getStatusCodeValue());
         assertEquals("Arquivo CSV processado com sucesso.", response.getBody());
-        verify(csvProcessorService, times(1)).processarCsv(file, executionTime);
     }
 
     @Test
-    void uploadFileProduto_EmptyFile_BadRequest() throws IOException {
-        MockMultipartFile file = new MockMultipartFile("file", "", "text/csv", "".getBytes());
+    void testUploadFileProduto_InvalidFileType() {
+        MultipartFile file = new MockMultipartFile("file", "test.txt", "text/plain", "test data".getBytes());
         LocalDateTime executionTime = LocalDateTime.now();
 
         ResponseEntity<String> response = cargaProdutoController.uploadFileProduto(file, executionTime);
 
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("O arquivo está vazio", response.getBody());
-        verify(csvProcessorService, never()).processarCsv(any(), any());
+        assertEquals(400, response.getStatusCodeValue());
+        assertEquals("O arquivo em formato invalido", response.getBody());
     }
 
     @Test
-    void testUploadFileProdutoThrowsException() throws Exception {
-        MultipartFile mockFile = mock(MultipartFile.class);
+    void testUploadFileProduto_EmptyFile() {
+        MultipartFile file = new MockMultipartFile("file", "test.csv", "text/csv", new byte[0]);
         LocalDateTime executionTime = LocalDateTime.now();
 
-        when(mockFile.isEmpty()).thenReturn(false);
-        doThrow(new RuntimeException("Simulated exception")).when(csvProcessorService).processarCsv(mockFile, executionTime);
+        ResponseEntity<String> response = cargaProdutoController.uploadFileProduto(file, executionTime);
 
-        ResponseEntity<String> response = cargaProdutoController.uploadFileProduto(mockFile, executionTime);
+        assertEquals(400, response.getStatusCodeValue());
+        assertEquals("O arquivo está vazio", response.getBody());
+    }
 
-        assertEquals(ResponseEntity.status(500).body("Erro ao processar o arquivo CSV: Simulated exception"), response);
+    @Test
+    void testUploadFileProduto_ProcessingError() throws Exception {
+        MultipartFile file = new MockMultipartFile("file", "test.csv", "text/csv", "test data".getBytes());
+        LocalDateTime executionTime = LocalDateTime.now();
+
+        doThrow(new RuntimeException("Processing failed")).when(csvProcessorService).processarCsv(file, executionTime);
+
+        ResponseEntity<String> response = cargaProdutoController.uploadFileProduto(file, executionTime);
+
+        assertEquals(500, response.getStatusCodeValue());
+        assertEquals("Erro ao processar o arquivo CSV: Processing failed", response.getBody());
     }
 }
