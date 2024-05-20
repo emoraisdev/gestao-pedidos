@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "idade",
+    "endereco"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "idade": {
+      "type": "integer"
+    },
+    "endereco": {
+      "type": "object",
+      "required": [
+        "id",
+        "rua",
+        "numero",
+        "bairro",
+        "cidade",
+        "estado",
+        "pais",
+        "cep",
+        "coordenada"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "rua": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "string"
+        },
+        "bairro": {
+          "type": "string"
+        },
+        "cidade": {
+          "type": "string"
+        },
+        "estado": {
+          "type": "string"
+        },
+        "pais": {
+          "type": "string"
+        },
+        "cep": {
+          "type": "string"
+        },
+        "coordenada": {
+          "type": "null"
+        }
+      }
+    }
+  }
+}

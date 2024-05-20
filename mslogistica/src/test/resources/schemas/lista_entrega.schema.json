@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "required": [
+    "content",
+    "pageable",
+    "last",
+    "totalPages",
+    "totalElements",
+    "first",
+    "size",
+    "number",
+    "sort",
+    "numberOfElements",
+    "empty"
+  ],
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "pedidoId",
+          "status",
+          "origem",
+          "destino",
+          "entregador",
+          "urlRota",
+          "localizacaoEntregador"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "pedidoId": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "origem": {
+            "type": "object",
+            "required": [
+              "id",
+              "rua",
+              "numero",
+              "bairro",
+              "cidade",
+              "estado",
+              "pais",
+              "cep",
+              "coordenada"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "rua": {
+                "type": "string"
+              },
+              "numero": {
+                "type": "string"
+              },
+              "bairro": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "estado": {
+                "type": "string"
+              },
+              "pais": {
+                "type": "string"
+              },
+              "cep": {
+                "type": "string"
+              },
+              "coordenada": {
+                "type": "null"
+              }
+            }
+          },
+          "destino": {
+            "type": "object",
+            "required": [
+              "id",
+              "rua",
+              "numero",
+              "bairro",
+              "cidade",
+              "estado",
+              "pais",
+              "cep",
+              "coordenada"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "rua": {
+                "type": "string"
+              },
+              "numero": {
+                "type": "string"
+              },
+              "bairro": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "estado": {
+                "type": "string"
+              },
+              "pais": {
+                "type": "string"
+              },
+              "cep": {
+                "type": "string"
+              },
+              "coordenada": {
+                "type": "null"
+              }
+            }
+          },
+          "entregador": {
+            "type": "object",
+            "required": [
+              "id",
+              "nome",
+              "idade",
+              "endereco"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "idade": {
+                "type": "integer"
+              },
+              "endereco": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "rua",
+                  "numero",
+                  "bairro",
+                  "cidade",
+                  "estado",
+                  "pais",
+                  "cep",
+                  "coordenada"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "rua": {
+                    "type": "string"
+                  },
+                  "numero": {
+                    "type": "string"
+                  },
+                  "bairro": {
+                    "type": "string"
+                  },
+                  "cidade": {
+                    "type": "string"
+                  },
+                  "estado": {
+                    "type": "string"
+                  },
+                  "pais": {
+                    "type": "string"
+                  },
+                  "cep": {
+                    "type": "string"
+                  },
+                  "coordenada": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          },
+          "urlRota": {
+            "type": "null"
+          },
+          "localizacaoEntregador": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    "pageable": {
+      "type": "object",
+      "required": [
+        "pageNumber",
+        "pageSize",
+        "sort",
+        "offset",
+        "unpaged",
+        "paged"
+      ],
+      "properties": {
+        "pageNumber": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "object",
+          "required": [
+            "empty",
+            "sorted",
+            "unsorted"
+          ],
+          "properties": {
+            "empty": {
+              "type": "boolean"
+            },
+            "sorted": {
+              "type": "boolean"
+            },
+            "unsorted": {
+              "type": "boolean"
+            }
+          }
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "unpaged": {
+          "type": "boolean"
+        },
+        "paged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "last": {
+      "type": "boolean"
+    },
+    "totalPages": {
+      "type": "integer"
+    },
+    "totalElements": {
+      "type": "integer"
+    },
+    "first": {
+      "type": "boolean"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "sort": {
+      "type": "object",
+      "required": [
+        "empty",
+        "sorted",
+        "unsorted"
+      ],
+      "properties": {
+        "empty": {
+          "type": "boolean"
+        },
+        "sorted": {
+          "type": "boolean"
+        },
+        "unsorted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "numberOfElements": {
+      "type": "integer"
+    },
+    "empty": {
+      "type": "boolean"
+    }
+  }
+}
