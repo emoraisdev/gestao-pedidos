@@ -27,6 +27,11 @@ public class CargaProdutoController {
 
         @PostMapping("/upload")
         public ResponseEntity<String> uploadFileProduto(@RequestParam("file") MultipartFile file, @RequestParam("executionTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime executionTime) {
+
+                if (!file.getContentType().equalsIgnoreCase("text/csv") || !file.getOriginalFilename().contains(".csv")) {
+                        return ResponseEntity.badRequest().body("O arquivo em formato invalido");
+                }
+
                 if (file.isEmpty()) {
                         return ResponseEntity.badRequest().body("O arquivo está vazio");
                 }

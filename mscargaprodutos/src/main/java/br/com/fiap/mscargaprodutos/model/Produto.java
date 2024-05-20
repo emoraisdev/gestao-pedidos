@@ -29,6 +29,10 @@ public class Produto {
 
     private LocalDateTime horarioExecucao;
 
+    private LocalDateTime horarioUpload;
+
+    private int tentativasEnvio;
+
     private String enviado;
 
 }

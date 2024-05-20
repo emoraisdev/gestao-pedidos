@@ -35,11 +35,14 @@ public class JobProdutoItemWriter implements ItemWriter<Produto> {
             for (Produto produto : list) {
                 HttpEntity<Produto> requestEntity = buildHttpEntity(produto);
                 ResponseEntity<ProdutoDTO> response = restTemplate.postForEntity(urlProduto,requestEntity, ProdutoDTO.class);
+                int tentativa = produto.getTentativasEnvio();
+                produto.setTentativasEnvio(tentativa++);
 
                 if (response.getStatusCode() == HttpStatus.OK) {
                     produto.setEnviado("S");
                     log.info("Chamada HTTP bem-sucedida para o produto: " + produto.getNome());
                 }
+
                 produtoRepository.save(produto);
             }
         } catch (Exception e) {
