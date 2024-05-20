@@ -6,8 +6,8 @@ Este serviço tem como funcionalidade principal permitir a importação de dados
 
 ## 2. Links
 
-- [GitHub](https://github.com/emoraisdev/gestao-pedidos/tree/master/mscargaprodutos)
-- [Swagger](http://<base-url>:8081/swagger-ui/index.html#/)
+- [GitHub - mscargaproduto](https://github.com/emoraisdev/gestao-pedidos/tree/master/mscargaprodutos)
+- http://<base-url>:8081/swagger-ui/index.html#/
 
 ## 3. Modelagem
 
