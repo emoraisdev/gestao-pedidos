@@ -41,7 +41,7 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getById(@PathVariable Long id) {
+    public ResponseEntity<Object> getById(@PathVariable String id) {
 
         try {
             Pedido pedido = pedidoService.getById(id);
@@ -55,7 +55,7 @@ public class PedidoController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Object> atualizarStatus(@PathVariable Long id,
+    public ResponseEntity<Object> atualizarStatus(@PathVariable String id,
                                                   @RequestBody StatusPedidoDTO status) {
 
         try {

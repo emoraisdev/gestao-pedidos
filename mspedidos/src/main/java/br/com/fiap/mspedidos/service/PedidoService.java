@@ -1,20 +1,17 @@
 package br.com.fiap.mspedidos.service;
 
-import br.com.fiap.mspedidos.dto.ItemPedidoDTO;
+import br.com.fiap.mspedidos.dto.EnderecoEntregaDTO;
 import br.com.fiap.mspedidos.dto.PedidoDTO;
 import br.com.fiap.mspedidos.dto.StatusPedidoDTO;
 import br.com.fiap.mspedidos.integracao.msprodutos.dto.ProdutoEstoqueResponseDTO;
 import br.com.fiap.mspedidos.integracao.msprodutos.service.IntegracaoProdutoService;
-import br.com.fiap.mspedidos.model.ItemPedido;
-import br.com.fiap.mspedidos.model.Pedido;
-import br.com.fiap.mspedidos.model.StatusPedido;
+import br.com.fiap.mspedidos.model.*;
 import br.com.fiap.mspedidos.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -44,14 +41,13 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    public Pedido getById(Long id) {
+    public Pedido getById(String id) {
         return pedidoRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Pedido não encontrado")
         );
     }
 
-    public Pedido atualizarStatus(Long entregaID, StatusPedidoDTO status) {
-
+    public Pedido atualizarStatus(String entregaID, StatusPedidoDTO status) {
         var pedido = getById(entregaID);
         pedido.setStatus(status.status());
         return pedidoRepository.save(pedido);
@@ -60,10 +56,42 @@ public class PedidoService {
     private Pedido criarPedido(PedidoDTO pedidoDTO) {
         Pedido pedido = new Pedido();
         pedido.setClientId(pedidoDTO.getClienteId());
-        pedido.setDataPedido(Calendar.getInstance());
+        pedido.setDataPedido(Calendar.getInstance().getTime());
         pedido.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
         pedido.setItensPedido(new ArrayList<>());
+        preencherDadosEndereco(pedido, pedidoDTO);
+        preencherDadosPagamento(pedido, pedidoDTO);
 
         return pedido;
+    }
+
+    private void preencherDadosEndereco(Pedido pedido, PedidoDTO pedidoDTO) {
+        Endereco endereco = new Endereco();
+        EnderecoEntregaDTO enderecoEntregaDTO = pedidoDTO.getEnderecoEntrega();
+        endereco.setLogradouro(enderecoEntregaDTO.getLogradouro());
+        endereco.setNumero(enderecoEntregaDTO.getNumero());
+        endereco.setComplemento(enderecoEntregaDTO.getComplemento());
+        endereco.setBairro(enderecoEntregaDTO.getBairro());
+        endereco.setCidade(enderecoEntregaDTO.getCidade());
+        endereco.setUf(enderecoEntregaDTO.getUf());
+        endereco.setCep(enderecoEntregaDTO.getCep());
+        pedido.setEnderecoEntrega(endereco);
+    }
+
+    private void preencherDadosPagamento(Pedido pedido, PedidoDTO pedidoDTO){
+        BigDecimal valorPedido = calcularValorTotalPedido(pedido.getItensPedido());
+        Pagamento pagamento = new Pagamento();
+        pagamento.setValorTotal(valorPedido);
+        pagamento.setFormaPagamento(pedidoDTO.getFormaPagamento());
+        pedido.setPagamento(pagamento);
+    }
+
+    private BigDecimal calcularValorTotalPedido(List<ItemPedido> itensPedido) {
+        BigDecimal valorTotal = BigDecimal.ZERO;
+        for (ItemPedido itemPedido : itensPedido) {
+            BigDecimal valorItem = itemPedido.getValorUnitario().multiply(BigDecimal.valueOf(itemPedido.getQuantidade()));
+            valorTotal = valorTotal.add(valorItem);
+        }
+        return valorTotal;
     }
 }

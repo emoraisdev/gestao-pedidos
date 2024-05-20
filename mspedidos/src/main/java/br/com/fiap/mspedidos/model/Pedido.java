@@ -1,29 +1,22 @@
 package br.com.fiap.mspedidos.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Calendar;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Data
-@Entity
+@Document("pedido")
 public class Pedido {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+    private String id;
     private Long clientId;
-
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itensPedido;
-
-    @Column(nullable = false)
-    private Calendar dataPedido;
-
-    @Column(nullable = false)
+    private Date dataPedido;
     private StatusPedido status;
+    private Endereco enderecoEntrega;
+    private Pagamento pagamento;
 }
