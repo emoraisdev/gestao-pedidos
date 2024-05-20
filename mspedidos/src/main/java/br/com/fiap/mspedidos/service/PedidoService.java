@@ -3,7 +3,6 @@ package br.com.fiap.mspedidos.service;
 import br.com.fiap.mspedidos.dto.EnderecoEntregaDTO;
 import br.com.fiap.mspedidos.dto.PedidoDTO;
 import br.com.fiap.mspedidos.dto.StatusPedidoDTO;
-import br.com.fiap.mspedidos.integracao.msprodutos.dto.ProdutoEstoqueResponseDTO;
 import br.com.fiap.mspedidos.integracao.msprodutos.service.IntegracaoProdutoService;
 import br.com.fiap.mspedidos.model.*;
 import br.com.fiap.mspedidos.repository.PedidoRepository;
@@ -32,7 +31,7 @@ public class PedidoService {
         if (itensPedido.isEmpty()){
             throw new RuntimeException("Sem itens");
         }
-        Pedido pedido = criarPedido(pedidoDTO);
+        Pedido pedido = criarPedido(pedidoDTO, itensPedido);
         pedido.setItensPedido(itensPedido);
         return pedidoRepository.save(pedido);
     }
@@ -53,12 +52,12 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
 
-    private Pedido criarPedido(PedidoDTO pedidoDTO) {
+    private Pedido criarPedido(PedidoDTO pedidoDTO, List<ItemPedido> itensPedido) {
         Pedido pedido = new Pedido();
         pedido.setClientId(pedidoDTO.getClienteId());
         pedido.setDataPedido(Calendar.getInstance().getTime());
         pedido.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
-        pedido.setItensPedido(new ArrayList<>());
+        pedido.setItensPedido(itensPedido);
         preencherDadosEndereco(pedido, pedidoDTO);
         preencherDadosPagamento(pedido, pedidoDTO);
 
