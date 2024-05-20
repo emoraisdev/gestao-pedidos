@@ -67,7 +67,7 @@ services:
     depends_on:
       - db
     ports:
-      - "8080:8080"
+      - "8083:8083"
     environment:
       PRODUTOS_URL: msprodutos
       DB_URL: mysql_db
@@ -76,6 +76,32 @@ services:
       DB_PASSWORD: root
     networks:
       - netms
+
+  mscargaprodutos:
+    build:
+      context: ./mscargaprodutos
+    container_name: mscargaprodutos
+    depends_on:
+      - db
+    ports:
+      - "8081:8081"
+    environment:
+      PRODUTOS_URL: msprodutos
+      DB_URL: mysql_db
+      DB_NAME: cargaproduto
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    networks:
+      - netms
+
+  msgateway:
+    build:
+      context: ./gateway
+    container_name: msgateway
+    ports:
+      - "8080:8080"
+    networks:
+      - netms      
 
 networks:
   netms:
