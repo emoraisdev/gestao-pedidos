@@ -17,7 +17,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<Cliente> criarCliente(@Valid @RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> criarCliente(@RequestBody Cliente cliente) {
         Cliente novoCliente = clienteService.salvarCliente(cliente);
         return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
     }
