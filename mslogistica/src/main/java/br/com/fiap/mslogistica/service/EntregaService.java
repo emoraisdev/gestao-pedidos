@@ -11,7 +11,7 @@ public interface EntregaService {
 
     Entrega incluir(Entrega entregador);
 
-    Entrega buscar(Long id);
+    Entrega buscar(Long id, boolean isGerarRota);
 
     Entrega alterar(Entrega entregador);
 

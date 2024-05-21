@@ -33,7 +33,7 @@ public class EntregaController {
     public ResponseEntity<Object> buscar(@PathVariable Long id) {
 
         try {
-            var entrega = service.buscar(id);
+            var entrega = service.buscar(id, true);
             return new ResponseEntity<>(entrega, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

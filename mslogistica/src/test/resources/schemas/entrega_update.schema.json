@@ -120,35 +120,12 @@
           ]
         },
         "coordenada": {
-          "type": "object",
-          "default": {},
+          "type": "null",
+          "default": null,
           "title": "The coordenada Schema",
-          "required": [
-            "latitude",
-            "longitude"
-          ],
-          "properties": {
-            "latitude": {
-              "type": "string",
-              "default": "",
-              "title": "The latitude Schema",
-              "examples": [
-                "-25.4314492"
-              ]
-            },
-            "longitude": {
-              "type": "string",
-              "default": "",
-              "title": "The longitude Schema",
-              "examples": [
-                "-49.2722348"
-              ]
-            }
-          },
-          "examples": [{
-            "latitude": "-25.4314492",
-            "longitude": "-49.2722348"
-          }]
+          "examples": [
+            null
+          ]
         }
       },
       "examples": [{
@@ -160,10 +137,7 @@
         "estado": "PR",
         "pais": "Brasil",
         "cep": "80060-000",
-        "coordenada": {
-          "latitude": "-25.4314492",
-          "longitude": "-49.2722348"
-        }
+        "coordenada": null
       }]
     },
     "destino": {
@@ -247,35 +221,12 @@
           ]
         },
         "coordenada": {
-          "type": "object",
-          "default": {},
+          "type": "null",
+          "default": null,
           "title": "The coordenada Schema",
-          "required": [
-            "latitude",
-            "longitude"
-          ],
-          "properties": {
-            "latitude": {
-              "type": "string",
-              "default": "",
-              "title": "The latitude Schema",
-              "examples": [
-                "-25.5185128"
-              ]
-            },
-            "longitude": {
-              "type": "string",
-              "default": "",
-              "title": "The longitude Schema",
-              "examples": [
-                "-49.1941032"
-              ]
-            }
-          },
-          "examples": [{
-            "latitude": "-25.5185128",
-            "longitude": "-49.1941032"
-          }]
+          "examples": [
+            null
+          ]
         }
       },
       "examples": [{
@@ -287,10 +238,7 @@
         "estado": "PR",
         "pais": "Brasil",
         "cep": "83040-010",
-        "coordenada": {
-          "latitude": "-25.5185128",
-          "longitude": "-49.1941032"
-        }
+        "coordenada": null
       }]
     },
     "entregador": {
@@ -349,7 +297,7 @@
               "default": 0,
               "title": "The id Schema",
               "examples": [
-                1
+                101
               ]
             },
             "rua": {
@@ -418,7 +366,7 @@
             }
           },
           "examples": [{
-            "id": 1,
+            "id": 101,
             "rua": "XV de Novembro",
             "numero": "971",
             "bairro": "Centro",
@@ -435,7 +383,7 @@
         "nome": "Pedro Jonas",
         "idade": 32,
         "endereco": {
-          "id": 1,
+          "id": 101,
           "rua": "XV de Novembro",
           "numero": "971",
           "bairro": "Centro",
@@ -448,11 +396,11 @@
       }]
     },
     "urlRota": {
-      "type": "string",
-      "default": "",
+      "type": "null",
+      "default": null,
       "title": "The urlRota Schema",
       "examples": [
-        "https://www.openstreetmap.org/directions?engine=fossgis_osrm_car\u0026route=-25.4314492%2C-49.2722348%3B-25.5185128%2C-49.1941032#map=13/-25.4314492/-49.2722348"
+        null
       ]
     },
     "localizacaoEntregador": {
@@ -477,10 +425,7 @@
       "estado": "PR",
       "pais": "Brasil",
       "cep": "80060-000",
-      "coordenada": {
-        "latitude": "-25.4314492",
-        "longitude": "-49.2722348"
-      }
+      "coordenada": null
     },
     "destino": {
       "id": 102,
@@ -491,17 +436,14 @@
       "estado": "PR",
       "pais": "Brasil",
       "cep": "83040-010",
-      "coordenada": {
-        "latitude": "-25.5185128",
-        "longitude": "-49.1941032"
-      }
+      "coordenada": null
     },
     "entregador": {
       "id": 101,
       "nome": "Pedro Jonas",
       "idade": 32,
       "endereco": {
-        "id": 1,
+        "id": 101,
         "rua": "XV de Novembro",
         "numero": "971",
         "bairro": "Centro",
@@ -512,7 +454,7 @@
         "coordenada": null
       }
     },
-    "urlRota": "https://www.openstreetmap.org/directions?engine=fossgis_osrm_car\u0026route=-25.4314492%2C-49.2722348%3B-25.5185128%2C-49.1941032#map=13/-25.4314492/-49.2722348",
+    "urlRota": null,
     "localizacaoEntregador": null
   }]
 }

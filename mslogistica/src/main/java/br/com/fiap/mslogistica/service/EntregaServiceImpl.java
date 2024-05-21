@@ -64,21 +64,23 @@ public class EntregaServiceImpl implements EntregaService {
     }
 
     @Override
-    public Entrega buscar(Long id) {
+    public Entrega buscar(Long id, boolean isGerarRota) {
 
         var entrega = repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Entrega.class.getSimpleName()));
 
-        try {
-            nomitationAPI.definirLocal(entrega.getOrigem());
-            nomitationAPI.definirLocal(entrega.getDestino());
+        if (isGerarRota) {
+            try {
+                nomitationAPI.definirLocal(entrega.getOrigem());
+                nomitationAPI.definirLocal(entrega.getDestino());
 
-            entrega.setUrlRota(OSMUrlBuilder.build(entrega.getOrigem().getCoordenada(),
-                    entrega.getDestino().getCoordenada(), entrega.getLocalizacaoEntregador()));
+                entrega.setUrlRota(OSMUrlBuilder.build(entrega.getOrigem().getCoordenada(),
+                        entrega.getDestino().getCoordenada(), entrega.getLocalizacaoEntregador()));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new BusinessException("Erro ao gerar URL OpenStreetMap para a Rota.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new BusinessException("Erro ao gerar URL OpenStreetMap para a Rota.");
+            }
         }
 
         return entrega;
@@ -87,7 +89,7 @@ public class EntregaServiceImpl implements EntregaService {
     @Override
     public Entrega alterar(Entrega entrega) {
 
-         buscar(entrega.getId());
+        buscar(entrega.getId(), false);
 
         entregadorService.buscar(entrega.getEntregador().getId());
 
@@ -96,7 +98,7 @@ public class EntregaServiceImpl implements EntregaService {
 
     @Override
     public boolean definirLocalEntregador(Long entregaID, Coordenada coordenada) {
-        var entrega = buscar(entregaID);
+        var entrega = buscar(entregaID, false);
         entrega.setLocalizacaoEntregador(coordenada);
         repo.save(entrega);
 
@@ -105,7 +107,7 @@ public class EntregaServiceImpl implements EntregaService {
 
     @Override
     public boolean remover(Long id) {
-        buscar(id);
+        buscar(id, false);
         repo.deleteById(id);
 
         return true;
@@ -120,7 +122,7 @@ public class EntregaServiceImpl implements EntregaService {
     @Transactional
     public Entrega atualizarStatus(Long entregaID, EntregaStatusDTO status) {
 
-        var entrega = buscar(entregaID);
+        var entrega = buscar(entregaID, false);
 
         StatusPedido statusPedido  = switch (status.status()) {
             case PREPARANDO ->  StatusPedido.MERCADORIA_EM_SEPARACAO;

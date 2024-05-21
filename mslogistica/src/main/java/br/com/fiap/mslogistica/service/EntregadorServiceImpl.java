@@ -34,7 +34,9 @@ public class EntregadorServiceImpl implements EntregadorService{
 
     @Override
     public Entregador alterar(Entregador entregador) {
-        buscar(entregador.getId());
+        var entregadorDB = buscar(entregador.getId());
+
+        entregador.getEndereco().setId(entregadorDB.getEndereco().getId());
 
         enderecoService.salvar(entregador.getEndereco());
 
