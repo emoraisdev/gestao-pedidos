@@ -2,6 +2,8 @@
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$id": "http://example.com/example.json",
   "type": "object",
+  "default": {},
+  "title": "Root Schema",
   "required": [
     "id",
     "pedidoId",
@@ -14,16 +16,33 @@
   ],
   "properties": {
     "id": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0,
+      "title": "The id Schema",
+      "examples": [
+        101
+      ]
     },
     "pedidoId": {
-      "type": "integer"
+      "type": "string",
+      "default": "",
+      "title": "The pedidoId Schema",
+      "examples": [
+        "321"
+      ]
     },
     "status": {
-      "type": "string"
+      "type": "string",
+      "default": "",
+      "title": "The status Schema",
+      "examples": [
+        "EM_ANDAMENTO"
+      ]
     },
     "origem": {
       "type": "object",
+      "default": {},
+      "title": "The origem Schema",
       "required": [
         "id",
         "rua",
@@ -37,48 +56,120 @@
       ],
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "null",
+          "default": null,
+          "title": "The id Schema",
+          "examples": [
+            null
+          ]
         },
         "rua": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The rua Schema",
+          "examples": [
+            "XV de Novembro"
+          ]
         },
         "numero": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The numero Schema",
+          "examples": [
+            "971"
+          ]
         },
         "bairro": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The bairro Schema",
+          "examples": [
+            "Centro"
+          ]
         },
         "cidade": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The cidade Schema",
+          "examples": [
+            "Curitiba"
+          ]
         },
         "estado": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The estado Schema",
+          "examples": [
+            "PR"
+          ]
         },
         "pais": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The pais Schema",
+          "examples": [
+            "Brasil"
+          ]
         },
         "cep": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The cep Schema",
+          "examples": [
+            "80060-000"
+          ]
         },
         "coordenada": {
           "type": "object",
+          "default": {},
+          "title": "The coordenada Schema",
           "required": [
             "latitude",
             "longitude"
           ],
           "properties": {
             "latitude": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The latitude Schema",
+              "examples": [
+                "-25.4314492"
+              ]
             },
             "longitude": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The longitude Schema",
+              "examples": [
+                "-49.2722348"
+              ]
             }
-          }
+          },
+          "examples": [{
+            "latitude": "-25.4314492",
+            "longitude": "-49.2722348"
+          }]
         }
-      }
+      },
+      "examples": [{
+        "id": null,
+        "rua": "XV de Novembro",
+        "numero": "971",
+        "bairro": "Centro",
+        "cidade": "Curitiba",
+        "estado": "PR",
+        "pais": "Brasil",
+        "cep": "80060-000",
+        "coordenada": {
+          "latitude": "-25.4314492",
+          "longitude": "-49.2722348"
+        }
+      }]
     },
     "destino": {
       "type": "object",
+      "default": {},
+      "title": "The destino Schema",
       "required": [
         "id",
         "rua",
@@ -92,48 +183,120 @@
       ],
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "default": 0,
+          "title": "The id Schema",
+          "examples": [
+            102
+          ]
         },
         "rua": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The rua Schema",
+          "examples": [
+            "Rua Acre"
+          ]
         },
         "numero": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The numero Schema",
+          "examples": [
+            "121"
+          ]
         },
         "bairro": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The bairro Schema",
+          "examples": [
+            "Afonso Pena"
+          ]
         },
         "cidade": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The cidade Schema",
+          "examples": [
+            "São José dos Pinhais"
+          ]
         },
         "estado": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The estado Schema",
+          "examples": [
+            "PR"
+          ]
         },
         "pais": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The pais Schema",
+          "examples": [
+            "Brasil"
+          ]
         },
         "cep": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The cep Schema",
+          "examples": [
+            "83040-010"
+          ]
         },
         "coordenada": {
           "type": "object",
+          "default": {},
+          "title": "The coordenada Schema",
           "required": [
             "latitude",
             "longitude"
           ],
           "properties": {
             "latitude": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The latitude Schema",
+              "examples": [
+                "-25.5185128"
+              ]
             },
             "longitude": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The longitude Schema",
+              "examples": [
+                "-49.1941032"
+              ]
             }
-          }
+          },
+          "examples": [{
+            "latitude": "-25.5185128",
+            "longitude": "-49.1941032"
+          }]
         }
-      }
+      },
+      "examples": [{
+        "id": 102,
+        "rua": "Rua Acre",
+        "numero": "121",
+        "bairro": "Afonso Pena",
+        "cidade": "São José dos Pinhais",
+        "estado": "PR",
+        "pais": "Brasil",
+        "cep": "83040-010",
+        "coordenada": {
+          "latitude": "-25.5185128",
+          "longitude": "-49.1941032"
+        }
+      }]
     },
     "entregador": {
       "type": "object",
+      "default": {},
+      "title": "The entregador Schema",
       "required": [
         "id",
         "nome",
@@ -142,16 +305,33 @@
       ],
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "default": 0,
+          "title": "The id Schema",
+          "examples": [
+            101
+          ]
         },
         "nome": {
-          "type": "string"
+          "type": "string",
+          "default": "",
+          "title": "The nome Schema",
+          "examples": [
+            "Pedro Jonas"
+          ]
         },
         "idade": {
-          "type": "integer"
+          "type": "integer",
+          "default": 0,
+          "title": "The idade Schema",
+          "examples": [
+            32
+          ]
         },
         "endereco": {
           "type": "object",
+          "default": {},
+          "title": "The endereco Schema",
           "required": [
             "id",
             "rua",
@@ -165,41 +345,174 @@
           ],
           "properties": {
             "id": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "title": "The id Schema",
+              "examples": [
+                1
+              ]
             },
             "rua": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The rua Schema",
+              "examples": [
+                "XV de Novembro"
+              ]
             },
             "numero": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The numero Schema",
+              "examples": [
+                "971"
+              ]
             },
             "bairro": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The bairro Schema",
+              "examples": [
+                "Centro"
+              ]
             },
             "cidade": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The cidade Schema",
+              "examples": [
+                "Curitiba"
+              ]
             },
             "estado": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The estado Schema",
+              "examples": [
+                "PR"
+              ]
             },
             "pais": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The pais Schema",
+              "examples": [
+                "Brasil"
+              ]
             },
             "cep": {
-              "type": "string"
+              "type": "string",
+              "default": "",
+              "title": "The cep Schema",
+              "examples": [
+                "80060-000"
+              ]
             },
             "coordenada": {
-              "type": "null"
+              "type": "null",
+              "default": null,
+              "title": "The coordenada Schema",
+              "examples": [
+                null
+              ]
             }
-          }
+          },
+          "examples": [{
+            "id": 1,
+            "rua": "XV de Novembro",
+            "numero": "971",
+            "bairro": "Centro",
+            "cidade": "Curitiba",
+            "estado": "PR",
+            "pais": "Brasil",
+            "cep": "80060-000",
+            "coordenada": null
+          }]
         }
-      }
+      },
+      "examples": [{
+        "id": 101,
+        "nome": "Pedro Jonas",
+        "idade": 32,
+        "endereco": {
+          "id": 1,
+          "rua": "XV de Novembro",
+          "numero": "971",
+          "bairro": "Centro",
+          "cidade": "Curitiba",
+          "estado": "PR",
+          "pais": "Brasil",
+          "cep": "80060-000",
+          "coordenada": null
+        }
+      }]
     },
     "urlRota": {
-      "type": "string"
+      "type": "string",
+      "default": "",
+      "title": "The urlRota Schema",
+      "examples": [
+        "https://www.openstreetmap.org/directions?engine=fossgis_osrm_car\u0026route=-25.4314492%2C-49.2722348%3B-25.5185128%2C-49.1941032#map=13/-25.4314492/-49.2722348"
+      ]
     },
     "localizacaoEntregador": {
-      "type": "null"
+      "type": "null",
+      "default": null,
+      "title": "The localizacaoEntregador Schema",
+      "examples": [
+        null
+      ]
     }
-  }
+  },
+  "examples": [{
+    "id": 101,
+    "pedidoId": "321",
+    "status": "EM_ANDAMENTO",
+    "origem": {
+      "id": null,
+      "rua": "XV de Novembro",
+      "numero": "971",
+      "bairro": "Centro",
+      "cidade": "Curitiba",
+      "estado": "PR",
+      "pais": "Brasil",
+      "cep": "80060-000",
+      "coordenada": {
+        "latitude": "-25.4314492",
+        "longitude": "-49.2722348"
+      }
+    },
+    "destino": {
+      "id": 102,
+      "rua": "Rua Acre",
+      "numero": "121",
+      "bairro": "Afonso Pena",
+      "cidade": "São José dos Pinhais",
+      "estado": "PR",
+      "pais": "Brasil",
+      "cep": "83040-010",
+      "coordenada": {
+        "latitude": "-25.5185128",
+        "longitude": "-49.1941032"
+      }
+    },
+    "entregador": {
+      "id": 101,
+      "nome": "Pedro Jonas",
+      "idade": 32,
+      "endereco": {
+        "id": 1,
+        "rua": "XV de Novembro",
+        "numero": "971",
+        "bairro": "Centro",
+        "cidade": "Curitiba",
+        "estado": "PR",
+        "pais": "Brasil",
+        "cep": "80060-000",
+        "coordenada": null
+      }
+    },
+    "urlRota": "https://www.openstreetmap.org/directions?engine=fossgis_osrm_car\u0026route=-25.4314492%2C-49.2722348%3B-25.5185128%2C-49.1941032#map=13/-25.4314492/-49.2722348",
+    "localizacaoEntregador": null
+  }]
 }

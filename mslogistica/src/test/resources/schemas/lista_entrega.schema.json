@@ -2,24 +2,29 @@
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$id": "http://example.com/example.json",
   "type": "object",
+  "default": {},
+  "title": "Root Schema",
   "required": [
     "content",
     "pageable",
-    "last",
     "totalPages",
     "totalElements",
-    "first",
+    "last",
     "size",
     "number",
     "sort",
     "numberOfElements",
+    "first",
     "empty"
   ],
   "properties": {
     "content": {
       "type": "array",
+      "default": [],
+      "title": "The content Schema",
       "items": {
         "type": "object",
+        "title": "A Schema",
         "required": [
           "id",
           "pedidoId",
@@ -32,16 +37,31 @@
         ],
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "title": "The id Schema",
+            "examples": [
+              101,
+              102
+            ]
           },
           "pedidoId": {
-            "type": "integer"
+            "type": "string",
+            "title": "The pedidoId Schema",
+            "examples": [
+              "27a7755d-9dbc-4a19-b868-13b3e3c639de",
+              "1ab77397-feab-4737-9b5f-242bc78764b1"
+            ]
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "title": "The status Schema",
+            "examples": [
+              "PREPARANDO"
+            ]
           },
           "origem": {
             "type": "object",
+            "title": "The origem Schema",
             "required": [
               "id",
               "rua",
@@ -55,36 +75,95 @@
             ],
             "properties": {
               "id": {
-                "type": "integer"
+                "type": "null",
+                "title": "The id Schema",
+                "examples": [
+                  null
+                ]
               },
               "rua": {
-                "type": "string"
+                "type": "string",
+                "title": "The rua Schema",
+                "examples": [
+                  "XV de Novembro"
+                ]
               },
               "numero": {
-                "type": "string"
+                "type": "string",
+                "title": "The numero Schema",
+                "examples": [
+                  "971"
+                ]
               },
               "bairro": {
-                "type": "string"
+                "type": "string",
+                "title": "The bairro Schema",
+                "examples": [
+                  "Centro"
+                ]
               },
               "cidade": {
-                "type": "string"
+                "type": "string",
+                "title": "The cidade Schema",
+                "examples": [
+                  "Curitiba"
+                ]
               },
               "estado": {
-                "type": "string"
+                "type": "string",
+                "title": "The estado Schema",
+                "examples": [
+                  "PR"
+                ]
               },
               "pais": {
-                "type": "string"
+                "type": "string",
+                "title": "The pais Schema",
+                "examples": [
+                  "Brasil"
+                ]
               },
               "cep": {
-                "type": "string"
+                "type": "string",
+                "title": "The cep Schema",
+                "examples": [
+                  "80060-000"
+                ]
               },
               "coordenada": {
-                "type": "null"
+                "type": "null",
+                "title": "The coordenada Schema",
+                "examples": [
+                  null
+                ]
               }
-            }
+            },
+            "examples": [{
+              "id": null,
+              "rua": "XV de Novembro",
+              "numero": "971",
+              "bairro": "Centro",
+              "cidade": "Curitiba",
+              "estado": "PR",
+              "pais": "Brasil",
+              "cep": "80060-000",
+              "coordenada": null
+            },
+              {
+                "id": null,
+                "rua": "XV de Novembro",
+                "numero": "971",
+                "bairro": "Centro",
+                "cidade": "Curitiba",
+                "estado": "PR",
+                "pais": "Brasil",
+                "cep": "80060-000",
+                "coordenada": null
+              }]
           },
           "destino": {
             "type": "object",
+            "title": "The destino Schema",
             "required": [
               "id",
               "rua",
@@ -98,36 +177,100 @@
             ],
             "properties": {
               "id": {
-                "type": "integer"
+                "type": "integer",
+                "title": "The id Schema",
+                "examples": [
+                  102,
+                  101
+                ]
               },
               "rua": {
-                "type": "string"
+                "type": "string",
+                "title": "The rua Schema",
+                "examples": [
+                  "Rua Acre",
+                  "Rua XV"
+                ]
               },
               "numero": {
-                "type": "string"
+                "type": "string",
+                "title": "The numero Schema",
+                "examples": [
+                  "121"
+                ]
               },
               "bairro": {
-                "type": "string"
+                "type": "string",
+                "title": "The bairro Schema",
+                "examples": [
+                  "Afonso Pena",
+                  "Cruzeiro"
+                ]
               },
               "cidade": {
-                "type": "string"
+                "type": "string",
+                "title": "The cidade Schema",
+                "examples": [
+                  "São José dos Pinhais",
+                  "Curitiba"
+                ]
               },
               "estado": {
-                "type": "string"
+                "type": "string",
+                "title": "The estado Schema",
+                "examples": [
+                  "PR"
+                ]
               },
               "pais": {
-                "type": "string"
+                "type": "string",
+                "title": "The pais Schema",
+                "examples": [
+                  "Brasil"
+                ]
               },
               "cep": {
-                "type": "string"
+                "type": "string",
+                "title": "The cep Schema",
+                "examples": [
+                  "83040-010",
+                  "12345-321"
+                ]
               },
               "coordenada": {
-                "type": "null"
+                "type": "null",
+                "title": "The coordenada Schema",
+                "examples": [
+                  null
+                ]
               }
-            }
+            },
+            "examples": [{
+              "id": 102,
+              "rua": "Rua Acre",
+              "numero": "121",
+              "bairro": "Afonso Pena",
+              "cidade": "São José dos Pinhais",
+              "estado": "PR",
+              "pais": "Brasil",
+              "cep": "83040-010",
+              "coordenada": null
+            },
+              {
+                "id": 101,
+                "rua": "Rua XV",
+                "numero": "121",
+                "bairro": "Cruzeiro",
+                "cidade": "Curitiba",
+                "estado": "PR",
+                "pais": "Brasil",
+                "cep": "12345-321",
+                "coordenada": null
+              }]
           },
           "entregador": {
             "type": "object",
+            "title": "The entregador Schema",
             "required": [
               "id",
               "nome",
@@ -136,16 +279,29 @@
             ],
             "properties": {
               "id": {
-                "type": "integer"
+                "type": "integer",
+                "title": "The id Schema",
+                "examples": [
+                  101
+                ]
               },
               "nome": {
-                "type": "string"
+                "type": "string",
+                "title": "The nome Schema",
+                "examples": [
+                  "Pedro Jonas"
+                ]
               },
               "idade": {
-                "type": "integer"
+                "type": "integer",
+                "title": "The idade Schema",
+                "examples": [
+                  32
+                ]
               },
               "endereco": {
                 "type": "object",
+                "title": "The endereco Schema",
                 "required": [
                   "id",
                   "rua",
@@ -159,47 +315,329 @@
                 ],
                 "properties": {
                   "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "title": "The id Schema",
+                    "examples": [
+                      1
+                    ]
                   },
                   "rua": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "The rua Schema",
+                    "examples": [
+                      "XV de Novembro"
+                    ]
                   },
                   "numero": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "The numero Schema",
+                    "examples": [
+                      "971"
+                    ]
                   },
                   "bairro": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "The bairro Schema",
+                    "examples": [
+                      "Centro"
+                    ]
                   },
                   "cidade": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "The cidade Schema",
+                    "examples": [
+                      "Curitiba"
+                    ]
                   },
                   "estado": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "The estado Schema",
+                    "examples": [
+                      "PR"
+                    ]
                   },
                   "pais": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "The pais Schema",
+                    "examples": [
+                      "Brasil"
+                    ]
                   },
                   "cep": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "The cep Schema",
+                    "examples": [
+                      "80060-000"
+                    ]
                   },
                   "coordenada": {
-                    "type": "null"
+                    "type": "null",
+                    "title": "The coordenada Schema",
+                    "examples": [
+                      null
+                    ]
                   }
-                }
+                },
+                "examples": [{
+                  "id": 1,
+                  "rua": "XV de Novembro",
+                  "numero": "971",
+                  "bairro": "Centro",
+                  "cidade": "Curitiba",
+                  "estado": "PR",
+                  "pais": "Brasil",
+                  "cep": "80060-000",
+                  "coordenada": null
+                },
+                  {
+                    "id": 1,
+                    "rua": "XV de Novembro",
+                    "numero": "971",
+                    "bairro": "Centro",
+                    "cidade": "Curitiba",
+                    "estado": "PR",
+                    "pais": "Brasil",
+                    "cep": "80060-000",
+                    "coordenada": null
+                  }]
               }
-            }
+            },
+            "examples": [{
+              "id": 101,
+              "nome": "Pedro Jonas",
+              "idade": 32,
+              "endereco": {
+                "id": 1,
+                "rua": "XV de Novembro",
+                "numero": "971",
+                "bairro": "Centro",
+                "cidade": "Curitiba",
+                "estado": "PR",
+                "pais": "Brasil",
+                "cep": "80060-000",
+                "coordenada": null
+              }
+            },
+              {
+                "id": 101,
+                "nome": "Pedro Jonas",
+                "idade": 32,
+                "endereco": {
+                  "id": 1,
+                  "rua": "XV de Novembro",
+                  "numero": "971",
+                  "bairro": "Centro",
+                  "cidade": "Curitiba",
+                  "estado": "PR",
+                  "pais": "Brasil",
+                  "cep": "80060-000",
+                  "coordenada": null
+                }
+              }]
           },
           "urlRota": {
-            "type": "null"
+            "type": "null",
+            "title": "The urlRota Schema",
+            "examples": [
+              null
+            ]
           },
           "localizacaoEntregador": {
-            "type": "null"
+            "type": "null",
+            "title": "The localizacaoEntregador Schema",
+            "examples": [
+              null
+            ]
           }
-        }
-      }
+        },
+        "examples": [{
+          "id": 101,
+          "pedidoId": "27a7755d-9dbc-4a19-b868-13b3e3c639de",
+          "status": "PREPARANDO",
+          "origem": {
+            "id": null,
+            "rua": "XV de Novembro",
+            "numero": "971",
+            "bairro": "Centro",
+            "cidade": "Curitiba",
+            "estado": "PR",
+            "pais": "Brasil",
+            "cep": "80060-000",
+            "coordenada": null
+          },
+          "destino": {
+            "id": 102,
+            "rua": "Rua Acre",
+            "numero": "121",
+            "bairro": "Afonso Pena",
+            "cidade": "São José dos Pinhais",
+            "estado": "PR",
+            "pais": "Brasil",
+            "cep": "83040-010",
+            "coordenada": null
+          },
+          "entregador": {
+            "id": 101,
+            "nome": "Pedro Jonas",
+            "idade": 32,
+            "endereco": {
+              "id": 1,
+              "rua": "XV de Novembro",
+              "numero": "971",
+              "bairro": "Centro",
+              "cidade": "Curitiba",
+              "estado": "PR",
+              "pais": "Brasil",
+              "cep": "80060-000",
+              "coordenada": null
+            }
+          },
+          "urlRota": null,
+          "localizacaoEntregador": null
+        },
+          {
+            "id": 102,
+            "pedidoId": "1ab77397-feab-4737-9b5f-242bc78764b1",
+            "status": "PREPARANDO",
+            "origem": {
+              "id": null,
+              "rua": "XV de Novembro",
+              "numero": "971",
+              "bairro": "Centro",
+              "cidade": "Curitiba",
+              "estado": "PR",
+              "pais": "Brasil",
+              "cep": "80060-000",
+              "coordenada": null
+            },
+            "destino": {
+              "id": 101,
+              "rua": "Rua XV",
+              "numero": "121",
+              "bairro": "Cruzeiro",
+              "cidade": "Curitiba",
+              "estado": "PR",
+              "pais": "Brasil",
+              "cep": "12345-321",
+              "coordenada": null
+            },
+            "entregador": {
+              "id": 101,
+              "nome": "Pedro Jonas",
+              "idade": 32,
+              "endereco": {
+                "id": 1,
+                "rua": "XV de Novembro",
+                "numero": "971",
+                "bairro": "Centro",
+                "cidade": "Curitiba",
+                "estado": "PR",
+                "pais": "Brasil",
+                "cep": "80060-000",
+                "coordenada": null
+              }
+            },
+            "urlRota": null,
+            "localizacaoEntregador": null
+          }]
+      },
+      "examples": [
+        [{
+          "id": 101,
+          "pedidoId": "27a7755d-9dbc-4a19-b868-13b3e3c639de",
+          "status": "PREPARANDO",
+          "origem": {
+            "id": null,
+            "rua": "XV de Novembro",
+            "numero": "971",
+            "bairro": "Centro",
+            "cidade": "Curitiba",
+            "estado": "PR",
+            "pais": "Brasil",
+            "cep": "80060-000",
+            "coordenada": null
+          },
+          "destino": {
+            "id": 102,
+            "rua": "Rua Acre",
+            "numero": "121",
+            "bairro": "Afonso Pena",
+            "cidade": "São José dos Pinhais",
+            "estado": "PR",
+            "pais": "Brasil",
+            "cep": "83040-010",
+            "coordenada": null
+          },
+          "entregador": {
+            "id": 101,
+            "nome": "Pedro Jonas",
+            "idade": 32,
+            "endereco": {
+              "id": 1,
+              "rua": "XV de Novembro",
+              "numero": "971",
+              "bairro": "Centro",
+              "cidade": "Curitiba",
+              "estado": "PR",
+              "pais": "Brasil",
+              "cep": "80060-000",
+              "coordenada": null
+            }
+          },
+          "urlRota": null,
+          "localizacaoEntregador": null
+        },
+          {
+            "id": 102,
+            "pedidoId": "1ab77397-feab-4737-9b5f-242bc78764b1",
+            "status": "PREPARANDO",
+            "origem": {
+              "id": null,
+              "rua": "XV de Novembro",
+              "numero": "971",
+              "bairro": "Centro",
+              "cidade": "Curitiba",
+              "estado": "PR",
+              "pais": "Brasil",
+              "cep": "80060-000",
+              "coordenada": null
+            },
+            "destino": {
+              "id": 101,
+              "rua": "Rua XV",
+              "numero": "121",
+              "bairro": "Cruzeiro",
+              "cidade": "Curitiba",
+              "estado": "PR",
+              "pais": "Brasil",
+              "cep": "12345-321",
+              "coordenada": null
+            },
+            "entregador": {
+              "id": 101,
+              "nome": "Pedro Jonas",
+              "idade": 32,
+              "endereco": {
+                "id": 1,
+                "rua": "XV de Novembro",
+                "numero": "971",
+                "bairro": "Centro",
+                "cidade": "Curitiba",
+                "estado": "PR",
+                "pais": "Brasil",
+                "cep": "80060-000",
+                "coordenada": null
+              }
+            },
+            "urlRota": null,
+            "localizacaoEntregador": null
+          }]
+      ]
     },
     "pageable": {
       "type": "object",
+      "default": {},
+      "title": "The pageable Schema",
       "required": [
         "pageNumber",
         "pageSize",
@@ -210,13 +648,25 @@
       ],
       "properties": {
         "pageNumber": {
-          "type": "integer"
+          "type": "integer",
+          "default": 0,
+          "title": "The pageNumber Schema",
+          "examples": [
+            0
+          ]
         },
         "pageSize": {
-          "type": "integer"
+          "type": "integer",
+          "default": 0,
+          "title": "The pageSize Schema",
+          "examples": [
+            10
+          ]
         },
         "sort": {
           "type": "object",
+          "default": {},
+          "title": "The sort Schema",
           "required": [
             "empty",
             "sorted",
@@ -224,47 +674,118 @@
           ],
           "properties": {
             "empty": {
-              "type": "boolean"
+              "type": "boolean",
+              "default": false,
+              "title": "The empty Schema",
+              "examples": [
+                true
+              ]
             },
             "sorted": {
-              "type": "boolean"
+              "type": "boolean",
+              "default": false,
+              "title": "The sorted Schema",
+              "examples": [
+                false
+              ]
             },
             "unsorted": {
-              "type": "boolean"
+              "type": "boolean",
+              "default": false,
+              "title": "The unsorted Schema",
+              "examples": [
+                true
+              ]
             }
-          }
+          },
+          "examples": [{
+            "empty": true,
+            "sorted": false,
+            "unsorted": true
+          }]
         },
         "offset": {
-          "type": "integer"
+          "type": "integer",
+          "default": 0,
+          "title": "The offset Schema",
+          "examples": [
+            0
+          ]
         },
         "unpaged": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false,
+          "title": "The unpaged Schema",
+          "examples": [
+            false
+          ]
         },
         "paged": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false,
+          "title": "The paged Schema",
+          "examples": [
+            true
+          ]
         }
-      }
-    },
-    "last": {
-      "type": "boolean"
+      },
+      "examples": [{
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+          "empty": true,
+          "sorted": false,
+          "unsorted": true
+        },
+        "offset": 0,
+        "unpaged": false,
+        "paged": true
+      }]
     },
     "totalPages": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0,
+      "title": "The totalPages Schema",
+      "examples": [
+        1
+      ]
     },
     "totalElements": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0,
+      "title": "The totalElements Schema",
+      "examples": [
+        2
+      ]
     },
-    "first": {
-      "type": "boolean"
+    "last": {
+      "type": "boolean",
+      "default": false,
+      "title": "The last Schema",
+      "examples": [
+        true
+      ]
     },
     "size": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0,
+      "title": "The size Schema",
+      "examples": [
+        10
+      ]
     },
     "number": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0,
+      "title": "The number Schema",
+      "examples": [
+        0
+      ]
     },
     "sort": {
       "type": "object",
+      "default": {},
+      "title": "The sort Schema",
       "required": [
         "empty",
         "sorted",
@@ -272,21 +793,176 @@
       ],
       "properties": {
         "empty": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false,
+          "title": "The empty Schema",
+          "examples": [
+            true
+          ]
         },
         "sorted": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false,
+          "title": "The sorted Schema",
+          "examples": [
+            false
+          ]
         },
         "unsorted": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false,
+          "title": "The unsorted Schema",
+          "examples": [
+            true
+          ]
         }
-      }
+      },
+      "examples": [{
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      }]
     },
     "numberOfElements": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0,
+      "title": "The numberOfElements Schema",
+      "examples": [
+        2
+      ]
+    },
+    "first": {
+      "type": "boolean",
+      "default": false,
+      "title": "The first Schema",
+      "examples": [
+        true
+      ]
     },
     "empty": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false,
+      "title": "The empty Schema",
+      "examples": [
+        false
+      ]
     }
-  }
+  },
+  "examples": [{
+    "content": [{
+      "id": 101,
+      "pedidoId": "27a7755d-9dbc-4a19-b868-13b3e3c639de",
+      "status": "PREPARANDO",
+      "origem": {
+        "id": null,
+        "rua": "XV de Novembro",
+        "numero": "971",
+        "bairro": "Centro",
+        "cidade": "Curitiba",
+        "estado": "PR",
+        "pais": "Brasil",
+        "cep": "80060-000",
+        "coordenada": null
+      },
+      "destino": {
+        "id": 102,
+        "rua": "Rua Acre",
+        "numero": "121",
+        "bairro": "Afonso Pena",
+        "cidade": "São José dos Pinhais",
+        "estado": "PR",
+        "pais": "Brasil",
+        "cep": "83040-010",
+        "coordenada": null
+      },
+      "entregador": {
+        "id": 101,
+        "nome": "Pedro Jonas",
+        "idade": 32,
+        "endereco": {
+          "id": 1,
+          "rua": "XV de Novembro",
+          "numero": "971",
+          "bairro": "Centro",
+          "cidade": "Curitiba",
+          "estado": "PR",
+          "pais": "Brasil",
+          "cep": "80060-000",
+          "coordenada": null
+        }
+      },
+      "urlRota": null,
+      "localizacaoEntregador": null
+    },
+      {
+        "id": 102,
+        "pedidoId": "1ab77397-feab-4737-9b5f-242bc78764b1",
+        "status": "PREPARANDO",
+        "origem": {
+          "id": null,
+          "rua": "XV de Novembro",
+          "numero": "971",
+          "bairro": "Centro",
+          "cidade": "Curitiba",
+          "estado": "PR",
+          "pais": "Brasil",
+          "cep": "80060-000",
+          "coordenada": null
+        },
+        "destino": {
+          "id": 101,
+          "rua": "Rua XV",
+          "numero": "121",
+          "bairro": "Cruzeiro",
+          "cidade": "Curitiba",
+          "estado": "PR",
+          "pais": "Brasil",
+          "cep": "12345-321",
+          "coordenada": null
+        },
+        "entregador": {
+          "id": 101,
+          "nome": "Pedro Jonas",
+          "idade": 32,
+          "endereco": {
+            "id": 1,
+            "rua": "XV de Novembro",
+            "numero": "971",
+            "bairro": "Centro",
+            "cidade": "Curitiba",
+            "estado": "PR",
+            "pais": "Brasil",
+            "cep": "80060-000",
+            "coordenada": null
+          }
+        },
+        "urlRota": null,
+        "localizacaoEntregador": null
+      }],
+    "pageable": {
+      "pageNumber": 0,
+      "pageSize": 10,
+      "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+      },
+      "offset": 0,
+      "unpaged": false,
+      "paged": true
+    },
+    "totalPages": 1,
+    "totalElements": 2,
+    "last": true,
+    "size": 10,
+    "number": 0,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "numberOfElements": 2,
+    "first": true,
+    "empty": false
+  }]
 }

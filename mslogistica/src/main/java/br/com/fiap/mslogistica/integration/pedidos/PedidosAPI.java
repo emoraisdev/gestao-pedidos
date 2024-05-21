@@ -1,6 +1,8 @@
 package br.com.fiap.mslogistica.integration.pedidos;
 
 import br.com.fiap.mslogistica.exception.BusinessException;
+import br.com.fiap.mslogistica.integration.pedidos.dto.PedidoDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
@@ -41,16 +43,23 @@ public class PedidosAPI {
         });
     }
 
-    public Object consultar(Long pedidoId) {
+    public PedidoDTO consultar(String pedidoId) {
 
         var retorno = restTemplate.getForObject(urlMSPedidos +
                         API_PEDIDOS + pedidoId,
                 String.class);
 
-        return retorno;
+        try {
+            var pedido = new ObjectMapper().readValue(retorno, PedidoDTO.class);
+            return pedido;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
-    public Object atualizarStatus(Long pedidoId, Integer status) {
+    public Object atualizarStatus(String pedidoId, Integer status) {
 
         // Cria o objeto de requisição
         StatusUpdateRequest request = new StatusUpdateRequest(status);

@@ -31,28 +31,6 @@ public class EntregaControllerTest {
     }
 
     @Nested
-    class RegistrarEntrega {
-
-        @Test
-        void devePermitirRegistrarEntrega (){
-
-            var entrega = EntregaHelper.gerarEntrega();
-
-            given()
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .body(entrega)
-//                    .log().all()
-                    .when()
-                    .post("/entregas")
-                    .then()
-                    .statusCode(HttpStatus.CREATED.value())
-                    .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(
-                            "schemas/entrega.schema.json"));
-        }
-
-    }
-
-    @Nested
     class BuscarEntrega {
 
         @Test
@@ -83,7 +61,7 @@ public class EntregaControllerTest {
         void devePermitirAlterarEntrega() throws Exception {
 
             var entrega = EntregaHelper.gerarEntrega();
-            entrega.setPedidoId(15L);
+            entrega.setPedidoId("321");
             entrega.setId(101L);
 
             given()

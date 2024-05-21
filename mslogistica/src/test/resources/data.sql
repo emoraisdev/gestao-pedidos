@@ -6,6 +6,6 @@ INSERT INTO entregador (id, idade,nome,endereco_id) VALUES
     (101, 35,'Marco Silva',101),
     (102, 25,'Joana Pires',102);
 
-INSERT INTO entrega (id,latitude,longitude,pedido_id,status,destino_id,entregador_id,origem_id) VALUES
-    (101, NULL,NULL,2,0,102,101,101),
-    (102, NULL,NULL,3,0,101,101,102);
+INSERT INTO entrega (id,latitude,longitude,pedido_id,status,destino_id,entregador_id) VALUES
+    (101, NULL,NULL,'27a7755d-9dbc-4a19-b868-13b3e3c639de',0,102,101),
+    (102, NULL,NULL,'1ab77397-feab-4737-9b5f-242bc78764b1',0,101,101);

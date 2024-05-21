@@ -5,6 +5,7 @@ import br.com.fiap.mslogistica.exception.EntityNotFoundException;
 import br.com.fiap.mslogistica.integration.NominationAPI;
 import br.com.fiap.mslogistica.integration.pedidos.PedidosAPI;
 import br.com.fiap.mslogistica.model.Coordenada;
+import br.com.fiap.mslogistica.model.Endereco;
 import br.com.fiap.mslogistica.model.Entrega;
 import br.com.fiap.mslogistica.model.dto.EntregaStatusDTO;
 import br.com.fiap.mslogistica.model.enums.EntregaStatus;
@@ -37,9 +38,23 @@ public class EntregaServiceImpl implements EntregaService {
 
         entregadorService.buscar(entrega.getEntregador().getId());
 
-        pedidosAPI.consultar(entrega.getPedidoId());
+        var pedido = pedidosAPI.consultar(entrega.getPedidoId());
+        var enderecoEntregaDTO = pedido.enderecoEntrega();
 
         entrega.setStatus(EntregaStatus.PREPARANDO);
+
+        var enderecoDestino = new Endereco();
+        enderecoDestino.setRua(enderecoEntregaDTO.logradouro());
+        enderecoDestino.setBairro(enderecoEntregaDTO.bairro());
+        enderecoDestino.setCidade(enderecoEntregaDTO.cidade());
+        enderecoDestino.setCep(enderecoEntregaDTO.cep());
+        enderecoDestino.setNumero(enderecoEntregaDTO.numero());
+        enderecoDestino.setEstado(enderecoEntregaDTO.uf());
+        enderecoDestino.setPais("Brasil");
+
+        enderecoService.salvar(enderecoDestino);
+
+        entrega.setDestino(enderecoDestino);
 
         var entregaBD = repo.save(entrega);
 
@@ -102,9 +117,19 @@ public class EntregaServiceImpl implements EntregaService {
     }
 
     @Override
+    @Transactional
     public Entrega atualizarStatus(Long entregaID, EntregaStatusDTO status) {
 
         var entrega = buscar(entregaID);
+
+        StatusPedido statusPedido  = switch (status.status()) {
+            case PREPARANDO ->  StatusPedido.MERCADORIA_EM_SEPARACAO;
+            case CONCLUIDA -> StatusPedido.ENTREGUE;
+            default -> StatusPedido.AGUARDANDO_ENTREGA;
+        };
+
+        pedidosAPI.atualizarStatus(entrega.getPedidoId(), statusPedido.ordinal());
+
         entrega.setStatus(status.status());
         return repo.save(entrega);
     }

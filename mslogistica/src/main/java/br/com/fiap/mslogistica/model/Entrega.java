@@ -19,14 +19,16 @@ public class Entrega {
     private Long id;
 
     @Column(nullable = false)
-    private Long pedidoId;
+    private String pedidoId;
 
     @Column(nullable = false)
     private EntregaStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "origem_id", referencedColumnName = "id", nullable = false)
-    private Endereco origem;
+
+    @Transient
+    private Endereco origem = Endereco.builder().rua("XV de Novembro")
+            .bairro("Centro").cidade("Curitiba").cep("80060-000").numero("971")
+            .estado("PR").pais("Brasil").build();
 
     @ManyToOne
     @JoinColumn(name = "destino_id", referencedColumnName = "id", nullable = false)
@@ -41,4 +43,5 @@ public class Entrega {
 
     @Embedded
     private Coordenada localizacaoEntregador;
+
 }

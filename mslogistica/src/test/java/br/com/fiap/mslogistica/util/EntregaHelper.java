@@ -9,7 +9,7 @@ public class EntregaHelper {
 
     public static Entrega gerarEntrega() {
         return Entrega.builder()
-                .pedidoId(1L)
+                .pedidoId("1")
                 .entregador(Entregador.builder().id(101L).build())
                 .status(EntregaStatus.EM_ANDAMENTO)
                 .origem(Endereco.builder().id(101L).build())
