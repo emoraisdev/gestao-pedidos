@@ -11,13 +11,19 @@ services:
       - "3307:3306"
     networks:
       - netms
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   mslogistica:
     build:
       context: ./mslogistica
     container_name: mslogistica
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8085:8085"
     environment:
@@ -33,7 +39,8 @@ services:
       context: ./msprodutos
     container_name: msprodutos
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8082:8082"
     environment:
@@ -49,7 +56,8 @@ services:
       context: ./msclientes
     container_name: msclientes
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8088:8088"
     environment:
@@ -65,7 +73,8 @@ services:
       context: ./mspedidos
     container_name: mspedidos
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8083:8083"
     environment:
@@ -82,7 +91,8 @@ services:
       context: ./mscargaprodutos
     container_name: mscargaprodutos
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8081:8081"
     environment:
@@ -101,7 +111,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - netms      
+      - netms
 
 networks:
   netms:
