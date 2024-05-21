@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "cf24dda6-8d7d-4f55-99c4-1c5a5132d718",
+		"_postman_id": "5651863d-a380-4af1-a7d5-e21471d6c3bf",
 		"name": "collection-gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "843251"
+		"_exporter_id": "23155843"
 	},
 	"item": [
 		{
@@ -56,8 +56,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -127,8 +126,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -200,11 +198,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/produtos/produtos",
+							"raw": "{{base_url}}/produtos/produtos",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8080",
 							"path": [
 								"produtos",
 								"produtos"
@@ -293,7 +290,61 @@
 			]
 		},
 		{
-			"name": "Microserviço Logistica",
+			"name": "Microserviço Pedidos",
+			"item": [
+				{
+					"name": "novo-pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clienteId\" : 123,\n    \"itensPedido\" : [\n        {\n            \"produtoId\" : 1,\n            \"quantidade\": 1\n        },\n        {\n            \"produtoId\" : 2,\n            \"quantidade\": 2\n        }\n    ],\n    \"enderecoEntrega\" : {\n        \"logradouro\" : \"Rua Castro\",\n        \"numero\" : \"990\",\n        \"bairro\" : \"Cruzeiro\",\n        \"cidade\" : \"São José dos Pinhais\",\n        \"uf\" : \"PR\",\n        \"cep\" : \"83010-070\"\n    },\n    \"formaPagamento\" : \"PIX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pedidos/api/pedidos/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pedidos",
+								"api",
+								"pedidos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listas-pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pedidos/api/pedidos/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pedidos",
+								"api",
+								"pedidos",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Microserviço Logística",
 			"item": [
 				{
 					"name": "Entregador",
@@ -359,14 +410,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/logistica/entregadores/2",
+									"raw": "{{base_url}}/logistica/entregadores/1",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"logistica",
 										"entregadores",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -379,7 +430,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"Jorge Silva B4\",\r\n    \"idade\": 37,\r\n    \"endereco\": {\r\n        \"rua\": \"Rua XVX\",\r\n        \"numero\": \"121\",\r\n        \"bairro\": \"Cruzeiro\",\r\n        \"cidade\": \"Curitiba\",\r\n        \"estado\": \"PR\",\r\n        \"pais\": \"Brasil\",\r\n        \"cep\": \"12345-321\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Jorge Silva B4\",\r\n    \"idade\": 37,\r\n    \"endereco\": {\r\n        \"rua\": \"Rua XVX\",\r\n        \"numero\": \"121\",\r\n        \"bairro\": \"Cruzeiro\",\r\n        \"cidade\": \"Curitiba\",\r\n        \"estado\": \"PR\",\r\n        \"pais\": \"Brasil\",\r\n        \"cep\": \"12345-321\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -414,14 +465,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/logistica/entregadores/3",
+									"raw": "{{base_url}}/logistica/entregadores/2",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"logistica",
 										"entregadores",
-										"3"
+										"2"
 									]
 								}
 							},
@@ -439,7 +490,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"pedidoId\": \"1ab77397-feab-4737-9b5f-242bc78764b1\",\r\n    \"entregador\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"raw": "{\r\n    \"pedidoId\": \"83043958-dce5-4189-8120-6571d9423426\",\r\n    \"entregador\": {\r\n        \"id\": 1\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -505,14 +556,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/logistica/entregas/7",
+									"raw": "{{base_url}}/logistica/entregas/1",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"logistica",
 										"entregas",
-										"7"
+										"1"
 									]
 								}
 							},
@@ -525,7 +576,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": 1,\r\n    \"pedidoId\": \"1ab77397-feab-4737-9b5f-242bc78764b1\",\r\n    \"status\": 1,\r\n    \"destino\": {\r\n        \"id\": 8\r\n    },\r\n    \"entregador\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"pedidoId\": \"83043958-dce5-4189-8120-6571d9423426\",\r\n    \"status\": 1,\r\n    \"destino\": {\r\n        \"id\": 3\r\n    },\r\n    \"entregador\": {\r\n        \"id\": 1\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -560,7 +611,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/logistica/entregas/local-entregador/7",
+									"raw": "{{base_url}}/logistica/entregas/local-entregador/1",
 									"host": [
 										"{{base_url}}"
 									],
@@ -568,7 +619,7 @@
 										"logistica",
 										"entregas",
 										"local-entregador",
-										"7"
+										"1"
 									]
 								}
 							},
@@ -589,7 +640,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/logistica/entregas/atualiza-status/7",
+									"raw": "{{base_url}}/logistica/entregas/atualiza-status/1",
 									"host": [
 										"{{base_url}}"
 									],
@@ -597,7 +648,7 @@
 										"logistica",
 										"entregas",
 										"atualiza-status",
-										"7"
+										"1"
 									]
 								}
 							},
@@ -618,14 +669,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/logistica/entregas/7",
+									"raw": "{{base_url}}/logistica/entregas/2",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"logistica",
 										"entregas",
-										"7"
+										"2"
 									]
 								}
 							},
@@ -634,6 +685,35 @@
 					]
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
 		}
 	]
 }
