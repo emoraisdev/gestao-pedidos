@@ -12,9 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 
+import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.mockito.BDDMockito.*;
 
 @WebMvcTest(ClienteController.class)
 public class ClienteControllerTest {
@@ -51,5 +51,26 @@ public class ClienteControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].nome").value("Victor"));
+    }
+
+    @Test
+    public void testBuscarCliente() throws Exception {
+        Cliente cliente = new Cliente();
+        when(clienteService.buscarPorId(1L)).thenReturn(cliente);
+
+        mockMvc.perform(get("/clientes/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+        verify(clienteService).buscarPorId(1L);
+    }
+    @Test
+    public void testDeletarCliente() throws Exception {
+        doNothing().when(clienteService).deletarCliente(1L);
+
+        mockMvc.perform(delete("/clientes/1"))
+                .andExpect(status().isNoContent());
+
+        verify(clienteService).deletarCliente(1L);
     }
 }
