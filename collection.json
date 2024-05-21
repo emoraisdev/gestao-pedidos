@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "cf24dda6-8d7d-4f55-99c4-1c5a5132d718",
+		"name": "collection-gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "843251"
+	},
+	"item": [
+		{
+			"name": "Microserviço Batch Carga Produto",
+			"item": [
+				{
+					"name": "Upload Arquivo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/fabio/Documents/produtos.csv"
+								},
+								{
+									"key": "executionTime",
+									"value": "2024-05-13T12:00:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/cargaprodutos/api/csv/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cargaprodutos",
+								"api",
+								"csv",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Microserviço Clientes",
+			"item": [
+				{
+					"name": "Criar Cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Victor\",\n  \"email\": \"victor@example.com\",\n  \"telefone\": \"123456789\",\n  \"endereco\": {\n    \"rua\": \"Rua Exemplo\",\n    \"numero\": \"123\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\",\n    \"cep\": \"01000-000\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/cliente/clientes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cliente",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cliente/clientes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cliente",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Cliente por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cliente/clientes/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cliente",
+								"clientes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Victor\",\n  \"email\": \"victor@example.com\",\n  \"telefone\": \"987654321\",\n  \"endereco\": {\n    \"rua\": \"Rua Atualizada\",\n    \"numero\": \"456\",\n    \"bairro\": \"Bairro Atualizado\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\",\n    \"cep\": \"00000-000\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/cliente/clientes/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cliente",
+								"clientes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cliente/clientes/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cliente",
+								"clientes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Microserviço Produtos",
+			"item": [
+				{
+					"name": "Criar Produto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Produto 1\",\n    \"descricao\": \"Descrição do Produto 1\",\n    \"quantidadeEmEstoque\": 10,\n    \"preco\": 99.99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/produtos/produtos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produtos",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos/produtos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Produto por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos/produtos/{{produto_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								"produtos",
+								"{{produto_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Novo Nome\",\n    \"descricao\": \"Nova Descrição\",\n    \"quantidadeEmEstoque\": 15,\n    \"preco\": 129.99\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos/produtos{{produto_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								"produtos{{produto_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Produto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos/produtos{{produto_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								"produtos{{produto_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Microserviço Logistica",
+			"item": [
+				{
+					"name": "Entregador",
+					"item": [
+						{
+							"name": "Salvar",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Marco Silva\",\r\n    \"idade\": 35,\r\n    \"endereco\": {\r\n        \"rua\": \"Rua XV\",\r\n        \"numero\": \"121\",\r\n        \"bairro\": \"Cruzeiro\",\r\n        \"cidade\": \"Curitiba\",\r\n        \"estado\": \"PR\",\r\n        \"pais\": \"Brasil\",\r\n        \"cep\": \"12345-321\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregadores",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregadores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistica/entregadores?page=0&size=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregadores"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalhar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistica/entregadores/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregadores",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"Jorge Silva B4\",\r\n    \"idade\": 37,\r\n    \"endereco\": {\r\n        \"rua\": \"Rua XVX\",\r\n        \"numero\": \"121\",\r\n        \"bairro\": \"Cruzeiro\",\r\n        \"cidade\": \"Curitiba\",\r\n        \"estado\": \"PR\",\r\n        \"pais\": \"Brasil\",\r\n        \"cep\": \"12345-321\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregadores",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregadores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Bolinha Pet Atualizada\",\r\n    \"descricao\": \"Descrição yy\",\r\n    \"preco\": 23.1,\r\n    \"urlDaImagem\": \"url 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregadores/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregadores",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Entregas",
+					"item": [
+						{
+							"name": "Salvar",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pedidoId\": \"1ab77397-feab-4737-9b5f-242bc78764b1\",\r\n    \"entregador\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/logistica/entregas?page=0&size=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregas"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalhar",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"place_id\": 38535506,\r\n        \"licence\": \"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\",\r\n        \"osm_type\": \"way\",\r\n        \"osm_id\": 24574281,\r\n        \"lat\": \"-25.4314492\",\r\n        \"lon\": \"-49.2722348\",\r\n        \"category\": \"highway\",\r\n        \"type\": \"pedestrian\",\r\n        \"place_rank\": 26,\r\n        \"importance\": 0.32107313109734914,\r\n        \"addresstype\": \"road\",\r\n        \"name\": \"Rua XV de Novembro\",\r\n        \"display_name\": \"Rua XV de Novembro, Centro, Curitiba, Região Geográfica Imediata de Curitiba, Região Metropolitana de Curitiba, Região Geográfica Intermediária de Curitiba, Paraná, Região Sul, 80020-901, Brasil\",\r\n        \"boundingbox\": [\r\n            \"-25.4314530\",\r\n            \"-25.4313955\",\r\n            \"-49.2723032\",\r\n            \"-49.2721973\"\r\n        ]\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregas/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregas",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"pedidoId\": \"1ab77397-feab-4737-9b5f-242bc78764b1\",\r\n    \"status\": 1,\r\n    \"destino\": {\r\n        \"id\": 8\r\n    },\r\n    \"entregador\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Local Entregador",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"latitude\": \"-25.48384\",\r\n    \"longitude\": \"-49.22087\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregas/local-entregador/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregas",
+										"local-entregador",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Status",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregas/atualiza-status/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregas",
+										"atualiza-status",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Bolinha Pet Atualizada\",\r\n    \"descricao\": \"Descrição yy\",\r\n    \"preco\": 23.1,\r\n    \"urlDaImagem\": \"url 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/logistica/entregas/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"logistica",
+										"entregas",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
