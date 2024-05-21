@@ -32,9 +32,6 @@ public class PedidoService {
             throw new RuntimeException("Sem itens");
         }
         Pedido pedido = criarPedido(pedidoDTO, itensPedido);
-//        for (ItemPedido itemPedido : itensPedido){
-//            itemPedido.setPedido(pedido);
-//        }
         pedido.setItensPedido(itensPedido);
         return pedidoRepository.save(pedido);
     }
